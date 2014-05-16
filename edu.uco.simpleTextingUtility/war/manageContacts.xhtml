@@ -1,0 +1,88 @@
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head id="head">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Compose a message</title>
+</h:head>
+<h:body id="body">
+	<h:panelGroup rendered="#{not webLayer.myAdminManager.authenticated}">
+            Unauthorized Access!
+        </h:panelGroup>
+	<h:panelGroup rendered="#{webLayer.myAdminManager.authenticated}">
+		<center>
+		<img src="http://i181.photobucket.com/albums/x180/hanks12kids/logocopy_zps41184dbc.png" />	
+		<br />
+		<br />
+        <h:form>
+           <p:commandButton ajax="false" value="Manage Groups" action="manageGroups.xhtml?faces-redirect=true" />
+           <p:commandButton ajax="false" value="Compose Message" action="composeMessage.xhtml?faces-redirect=true" />
+           <p:commandButton ajax="false" value="Message Archive" action="manageMessage.xhtml?faces-redirect=true" />
+		</h:form>
+		<br />
+			<h:form id="form">
+
+				<p:growl id="messages" showDetail="true" />
+
+				<p:dataTable var="o"
+					value="#{webLayer.myDB.groupList.get(webLayer.index).contacts}"
+					id="contactList" editable="true">
+
+					<f:facet name="header">
+            Manage Contacts
+        </f:facet>
+
+					<p:column headerText="Name" style="width:30%">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{o.name}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText value="#{o.name}" style="width:100%" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+
+					<p:column headerText="Phone number" style="width:20%">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{o.phoneNum}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText value="#{o.phoneNum}" style="width:100%"
+									label="phoneNum" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+
+					<p:column headerText="Edit" style="width:6%">
+						<p:rowEditor />
+					</p:column>
+
+					<p:column headerText="Delete" style="width:6%">
+						<p:commandButton ajax="false" icon="ui-icon-close"
+							action="#{webLayer.delete(o.phoneNum)}" />
+					</p:column>
+
+
+				</p:dataTable>
+
+			</h:form>
+			<h:form>
+		Name: &nbsp; &nbsp;  <p:inputText value="#{webLayer.name}" id="name" />
+				<br />
+		Phone #: <p:inputText value="#{webLayer.phoneNum}" id="phoneNum" />
+				<br />
+
+				<p:commandButton ajax="false" action="#{webLayer.addContact}"
+					value="Add Contact" />
+			</h:form>
+		</center>
+	</h:panelGroup>
+</h:body>
+</html>

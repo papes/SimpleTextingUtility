@@ -1,0 +1,57 @@
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head id="head">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Archive</title>
+</h:head>
+<h:body id="body">
+	<h:panelGroup rendered="#{not webLayer.myAdminManager.authenticated}">
+            Unauthorized Access!
+        </h:panelGroup>
+
+	<h:panelGroup rendered="#{webLayer.myAdminManager.authenticated}">
+
+		<center>
+		<img src="http://i181.photobucket.com/albums/x180/hanks12kids/logocopy_zps41184dbc.png" />	
+		<br />
+		<br />
+		<h:form>
+           <p:commandButton ajax="false" value="Manage Groups" action="manageGroups.xhtml?faces-redirect=true" />
+           <p:commandButton ajax="false" value="Compose Message" action="composeMessage.xhtml?faces-redirect=true" />
+           <p:commandButton ajax="false" value="Message Archive" action="manageMessage.xhtml?faces-redirect=true" />
+		</h:form>
+		<br />
+			<h:form id="form">
+
+				<p:growl id="messages" showDetail="true" />
+
+				<p:dataTable id="dataTable" var="o" value="#{webLayer.myDB.messageList}">
+					<f:facet name="header">  
+                  Message Archive
+                </f:facet>
+
+					<p:column sortBy="subject" headerText="subject">
+						<h:outputText value="#{o.subject}" />
+					</p:column>
+
+					<p:column sortBy="date" headerText="date">
+						<h:outputText value="#{o.date}" />
+					</p:column>
+					
+					<p:column sortBy="group.name" headerText="group">
+						<h:outputText value="#{o.group.name}" />
+					</p:column>
+
+				</p:dataTable>
+
+			</h:form>
+		</center>
+	</h:panelGroup>
+</h:body>
+</html>

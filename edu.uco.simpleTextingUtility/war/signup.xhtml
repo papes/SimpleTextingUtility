@@ -1,0 +1,40 @@
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head id="head">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Sign up page</title>
+</h:head>
+<h:body id="body">
+	<center>
+	<img src="http://i181.photobucket.com/albums/x180/hanks12kids/logocopy_zps41184dbc.png" />	
+		<br />
+		<br />
+		<h:form id="f">
+
+			<h:panelGrid columns="3">
+                Name:
+                <p:inputText id="name" value="#{webLayer.name}" />
+				<h:message for="name" styleClass="error2" />
+                Phone Number:
+                <p:inputText id="phone" value="#{webLayer.phoneNum}" />
+				<h:message for="phone" styleClass="error2" />
+				<h:outputText value="Groups: " />
+				<p:selectOneRadio id="grid" value="#{webLayer.groupName}" layout="grid"
+					columns="3">
+					<f:selectItems value="#{webLayer.groupNames}" />
+				</p:selectOneRadio>
+				<h:message for="grid" />
+			</h:panelGrid>
+			<p:commandButton ajax="false" action="#{webLayer.addContact}"
+				value="Subscribe" />
+		</h:form>
+	</center>
+
+</h:body>
+</html>

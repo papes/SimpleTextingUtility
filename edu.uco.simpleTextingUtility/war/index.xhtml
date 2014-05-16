@@ -1,0 +1,42 @@
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
+   xmlns:f="http://java.sun.com/jsf/core"
+   xmlns:h="http://java.sun.com/jsf/html"
+   xmlns:ui="http://java.sun.com/jsf/facelets"
+   xmlns:p="http://primefaces.org/ui">
+   <h:head id="head">
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <title>Log in page</title>
+   </h:head>
+   <h:body id="body">
+      
+        <h:form id="f">
+		<center>		
+		<img src="http://i181.photobucket.com/albums/x180/hanks12kids/logocopy_zps41184dbc.png" />	
+		<br />
+		<br />
+            <h:panelGrid columns="3">
+                Username:
+                <p:inputText id="username" value="#{webLayer.username}"/>
+                <h:message for="username" styleClass="error2"/>
+                Password:
+                <p:password id="password" value="#{webLayer.password}"/>
+                <h:message for="password" styleClass="error2"/>
+
+            </h:panelGrid>
+            <p:commandButton value="Log in" ajax="false"
+                            action="#{webLayer.myAdminManager.login(webLayer.username,webLayer.password)}" />
+        </center>
+        </h:form>
+		<br /> <br />
+		<center>
+		<h:form> 
+		<h:commandLink action="signup.xhtml?faces-redirect=true" value="Not an admin? Subscribe for texts here" />
+		<br />
+		<h:commandLink action="unsubscribe.xhtml?faces-redirect=true" value="Want to unsubscribe, click here" />
+		</h:form>
+		</center>
+   </h:body>
+</html>
